@@ -305,16 +305,18 @@ class _PatientRegisterState extends State<PatientRegister> {
                     phone: phone.text,
                     role: "patient",
                     bp: bp.text,
-                    sugarlevel: 5,
-                    oxylvl: 7,
-                    fever: 9,
-                    heartrate: 7);
+                    sugarlevel: int.parse(sugarLevel.text),
+                    oxylvl: int.parse(oxyLevel.text),
+                    fever: int.parse(fever.text),
+                    heartrate: int.parse(heartRate.text));
                 msg.then((value) {
                   if (value["status"]) {
                     UserModel user = value["user"];
+                    print(user);
                     Provider.of<UserProvider>(context, listen: false)
                         .setUser(user);
-                    Navigator.pushReplacementNamed(context, "/dashboard");
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => PatientLogin()));
                   } else {
                     print("fucked");
                   }

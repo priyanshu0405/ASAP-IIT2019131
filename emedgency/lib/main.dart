@@ -24,9 +24,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp(
-          home: FutureBuilder(
-              future: getUserData(),
+          home: StreamBuilder(
+              stream: getUserData().asStream(),
               builder: (context, snapshot) {
+                print(snapshot.data);
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                       return CategoryScreen();
                     else
                       UserPreferences().removeUser();
-                    return HomeScreen();
+                    return HomeScreen(user: snapshot.data);
                 }
               }),
           routes: {

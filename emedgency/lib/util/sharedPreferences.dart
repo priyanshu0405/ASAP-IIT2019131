@@ -8,6 +8,16 @@ class UserPreferences {
     prefs.setString("id", user.id);
     prefs.setString("name", user.name);
     prefs.setString("email", user.email);
+    prefs.setString("address", user.address);
+    prefs.setString("bp", user.history[0].bp);
+    prefs.setInt("oxylvl", user.history[0].oxylvl);
+    prefs.setInt("heartrate", user.history[0].heartrate);
+    prefs.setInt("sugarlevel", user.history[0].sugarlevel);
+    prefs.setInt("fever", user.history[0].fever);
+    prefs.setString("timestamp", user.history[0].timestamp);
+    prefs.setString("username", user.username);
+    prefs.setString("dob", user.dob);
+    prefs.setInt("v", user.v);
     prefs.setString("phone", user.phone);
     prefs.setString("role", user.role);
     prefs.setString("token", user.salt);
@@ -25,15 +35,38 @@ class UserPreferences {
     String id = prefs.getString("id");
     String name = prefs.getString("name");
     String email = prefs.getString("email");
+    String address = prefs.getString("address");
+    String bp = prefs.getString("bp");
+    int oxylvl = prefs.getInt("oxylvl");
+    int heartrate = prefs.getInt("heartrate");
+    int sugarlevel = prefs.getInt("sugarlevel");
+    int fever = prefs.getInt("fever");
+    String dob = prefs.getString("dob");
+    int v = prefs.getInt("v");
+    String username = prefs.getString("username");
     String phone = prefs.getString("phone");
     String role = prefs.getString("role");
     String salt = prefs.getString("salt");
     String hash = prefs.getString("hash");
+    String timestamp = prefs.getString("timestamp");
 
     return UserModel(
         id: id,
         name: name,
         email: email,
+        address: address,
+        dob: dob,
+        username: username,
+        v: v,
+        history: [
+          History(
+              bp: bp,
+              fever: fever,
+              oxylvl: oxylvl,
+              sugarlevel: sugarlevel,
+              heartrate: heartrate,
+              timestamp: timestamp)
+        ],
         phone: phone,
         role: role,
         salt: salt,
@@ -42,12 +75,12 @@ class UserPreferences {
 
   void removeUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.remove("name");
-    prefs.remove("email");
-    prefs.remove("phone");
-    prefs.remove("role");
-    prefs.remove("salt");
+    prefs.clear();
+    // prefs.remove("name");
+    // prefs.remove("email");
+    // prefs.remove("phone");
+    // prefs.remove("role");
+    // prefs.remove("salt");
   }
 
   Future<String> getToken(args) async {

@@ -81,25 +81,44 @@ class AuthProvider with ChangeNotifier {
       int oxylvl,
       int heartrate,
       int sugarlevel}) async {
+    final Map<String, dynamic> registerData = {
+      "username": username,
+      "email": email,
+      "name": name,
+      "password": password,
+      "role": role,
+      "dob": dob,
+      "phone": phone,
+      "address": address,
+      "history": {
+        "bp": bp,
+        "fever": fever,
+        "oxylvl": oxylvl,
+        "heartrate": heartrate,
+        "sugarlevel": sugarlevel
+      }
+    };
+    print(jsonEncode(registerData));
     return await http
         .post(Uri.parse(URL + REGISTER),
-            body: json.encode({
-              "username": username,
-              "email": email,
-              "name": name,
-              "password": password,
-              "role": role,
-              "dob": dob,
-              "phone": phone,
-              "address": address,
-              "history": {
-                "bp": bp,
-                "fever": fever,
-                "oxylvl": oxylvl,
-                "heartrate": heartrate,
-                "sugarlevel": sugarlevel
-              }
-            }))
+            body: json.encode(registerData
+                // "username": username,
+                // "email": email,
+                // "name": name,
+                // "password": password,
+                // "role": role,
+                // "dob": dob,
+                // "phone": phone,
+                // "address": address,
+                // "history": {
+                //   "bp": bp,
+                //   "fever": fever,
+                //   "oxylvl": oxylvl,
+                //   "heartrate": heartrate,
+                //   "sugarlevel": sugarlevel
+                // }
+                ),
+            headers: {'Content-Type': 'application/json'})
         .then(onValue)
         .catchError(onError);
   }
@@ -128,6 +147,12 @@ class AuthProvider with ChangeNotifier {
     }
 
     return result;
+  }
+
+  logOut() {
+    _loggedInStatus = Status.NotLoggedIn;
+    notifyListeners();
+    UserPreferences().removeUser();
   }
 
   static onError(error) {

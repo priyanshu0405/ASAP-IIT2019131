@@ -1,6 +1,7 @@
 import 'package:emedgency/model/userModel.dart';
 import 'package:emedgency/providers/authProvider.dart';
 import 'package:emedgency/providers/userProvider.dart';
+import 'package:emedgency/screens/homeScreen.dart';
 import 'package:emedgency/screens/patientRegister.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +124,12 @@ class _PatientLoginState extends State<PatientLogin> {
                     UserModel user = value["user"];
                     Provider.of<UserProvider>(context, listen: false)
                         .setUser(user);
-                    Navigator.pushReplacementNamed(context, "/dashboard");
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => HomeScreen(
+                                  user: user,
+                                )));
                   } else {
                     print("fucked");
                   }
