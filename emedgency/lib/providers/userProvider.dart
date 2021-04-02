@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:emedgency/constants/StringConstant.dart';
 import 'package:emedgency/model/userModel.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +16,12 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<UserModel> getUpdatedUser() async {
+    print("${URL}patient/${user.id}");
     await http.get(Uri.parse("${URL}patient/${user.id}")).then((val) {
-      setUser(userModelFromJson(val.body));
+      print(val.body);
+      var userJson = jsonDecode(val.body)["user"];
+      var userModel = jsonEncode(userJson);
+      setUser(userModelFromJson(userModel));
       return _user;
     });
   }

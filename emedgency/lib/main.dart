@@ -1,4 +1,5 @@
 import 'package:emedgency/providers/authProvider.dart';
+import 'package:emedgency/providers/docProvider.dart';
 import 'package:emedgency/providers/userProvider.dart';
 import 'package:emedgency/screens/homeScreen.dart';
 import 'package:emedgency/screens/patientLogin.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => DocProvider()),
       ],
       child: MaterialApp(
           home: StreamBuilder(

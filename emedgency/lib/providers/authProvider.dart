@@ -67,6 +67,49 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
+  Future<Map<String, dynamic>> loginDoctor(
+      String username, String email, String password) async {
+    var result;
+
+    final Map<String, dynamic> loginData = {
+      "email": email,
+      "password": password,
+      "username": username
+    };
+
+    _loggedInStatus = Status.Authenticating;
+    notifyListeners();
+
+    http.Response response = await http.post(
+      Uri.parse(URL + LOGIN_DOC),
+      body: json.encode(loginData),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      print(responseData);
+      //var userData = responseData['data'];
+
+      UserModel authUser = UserModel.fromJson(responseData);
+
+      UserPreferences().saveUser(authUser);
+
+      _loggedInStatus = Status.LoggedIn;
+      notifyListeners();
+
+      result = {'status': true, 'message': 'Successful', 'user': authUser};
+    } else {
+      _loggedInStatus = Status.NotLoggedIn;
+      notifyListeners();
+      result = {
+        'status': false,
+        'message': json.decode(response.body)['error']
+      };
+    }
+    return result;
+  }
+
   Future<Map<String, dynamic>> signUp(
       {String username,
       String email,

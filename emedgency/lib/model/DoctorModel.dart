@@ -1,11 +1,45 @@
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+List<DoctorModel> doctorModelFromJson(String str) => List<DoctorModel>.from(
+    json.decode(str).map((x) => DoctorModel.fromJson(x)));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String doctorModelToJson(List<DoctorModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class UserModel {
-  UserModel({
+class DoctorModel {
+  DoctorModel({
+    this.id,
+    this.patients,
+    this.email,
+    this.username,
+    this.v,
+  });
+
+  String id;
+  Patients patients;
+  String email;
+  String username;
+  int v;
+
+  factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
+        id: json["_id"],
+        patients: Patients.fromJson(json["patients"]),
+        email: json["email"],
+        username: json["username"],
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "patients": patients.toJson(),
+        "email": email,
+        "username": username,
+        "__v": v,
+      };
+}
+
+class Patients {
+  Patients({
     this.id,
     this.email,
     this.role,
@@ -15,10 +49,7 @@ class UserModel {
     this.address,
     this.phone,
     this.history,
-    this.salt,
-    this.hash,
     this.v,
-    this.prescription,
   });
 
   String id;
@@ -30,12 +61,9 @@ class UserModel {
   String address;
   String phone;
   List<History> history;
-  String salt;
-  String hash;
   int v;
-  String prescription;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory Patients.fromJson(Map<String, dynamic> json) => Patients(
         id: json["_id"],
         email: json["email"],
         role: json["role"],
@@ -46,10 +74,7 @@ class UserModel {
         phone: json["phone"],
         history:
             List<History>.from(json["history"].map((x) => History.fromJson(x))),
-        salt: json["salt"],
-        hash: json["hash"],
         v: json["__v"],
-        prescription: json["prescription"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -62,10 +87,7 @@ class UserModel {
         "address": address,
         "phone": phone,
         "history": List<dynamic>.from(history.map((x) => x.toJson())),
-        "salt": salt,
-        "hash": hash,
         "__v": v,
-        "prescription": prescription,
       };
 }
 
