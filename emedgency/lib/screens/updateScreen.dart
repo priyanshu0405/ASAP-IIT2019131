@@ -43,141 +43,160 @@ class _UpdateScreenState extends State<UpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Emedgency',
-            style: TextStyle(color: Colors.white),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/bg.jpeg'),
+            fit: BoxFit.cover,
           ),
-          backgroundColor: Colors.redAccent,
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
         ),
-        body: Consumer<UserProvider>(
-          builder: (_, user, child) {
-            return ListView(
-              padding: const EdgeInsets.all(30),
-              children: [
-                Text(
-                  'Current Medical records',
-                  style: TextStyle(fontSize: 25),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                TextFormField(
-                  controller: fever,
-                  decoration: InputDecoration(
-                    labelText: 'Body Temperature',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text(
+              'Emedgency',
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.redAccent,
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+          ),
+          body: Consumer<UserProvider>(
+            builder: (_, user, child) {
+              return ListView(
+                padding: const EdgeInsets.all(30),
+                children: [
+                  Text(
+                    'Current Medical records',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  TextFormField(
+                    controller: fever,
+                    decoration: InputDecoration(
+                      labelText: 'Body Temperature',
+                      hintText: 'x celsius',
+                      labelStyle: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: oxyLevel,
-                  decoration: InputDecoration(
-                    labelText: 'Oxygen Level',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: oxyLevel,
+                    decoration: InputDecoration(
+                      labelText: 'Oxygen Level',
+                      hintText: 'x %',
+                      labelStyle: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: bp,
-                  decoration: InputDecoration(
-                    labelText: 'Blood Pressure',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: bp,
+                    decoration: InputDecoration(
+                      labelText: 'Blood Pressure',
+                      hintText: 'x/y',
+                      labelStyle: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: sugarLevel,
-                  decoration: InputDecoration(
-                    labelText: 'Sugar Level',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: sugarLevel,
+                    decoration: InputDecoration(
+                      labelText: 'Sugar Level',
+                      hintText: 'x mg/dL',
+                      labelStyle: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: heartRate,
-                  decoration: InputDecoration(
-                    labelText: 'Heart Rate',
-                    labelStyle: TextStyle(color: Colors.redAccent),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular((25.0)),
-                      borderSide: BorderSide(color: Colors.redAccent),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: heartRate,
+                    decoration: InputDecoration(
+                      labelText: 'Heart Rate',
+                      hintText: 'x per minutes',
+                      labelStyle: TextStyle(
+                          color: Colors.redAccent, fontWeight: FontWeight.bold),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular((25.0)),
+                        borderSide: BorderSide(color: Colors.redAccent),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      await sendUpdateRequest(user.user.id);
-                      context.read<UserProvider>().getUpdatedUser();
-                      Navigator.pop(context);
-                    },
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.redAccent)),
-                    child: Text('Update'),
+                  SizedBox(
+                    height: 40,
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            );
-          },
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await sendUpdateRequest(user.user.id);
+                        context.read<UserProvider>().getUpdatedUser();
+                        Navigator.pop(context);
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.redAccent)),
+                      child: Text('Update'),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

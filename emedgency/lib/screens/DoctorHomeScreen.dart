@@ -29,70 +29,83 @@ class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
             child: CircularProgressIndicator(),
           );
         }
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Emedgency',
-              style: TextStyle(color: Colors.white),
+        return SafeArea(
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/bg.jpeg'),
+                fit: BoxFit.cover,
+              ),
             ),
-            backgroundColor: Colors.redAccent,
-            leading: Container(),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.logout),
-                onPressed: () async {
-                  await auth.logOut();
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (_) => CategoryScreen()));
-                },
-              )
-            ],
-          ),
-          body: docProvider.doctorModel.length > 0
-              ? ListView.builder(
-                  itemCount: docProvider.doctorModel.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Material(
-                        elevation: 20,
-                        child: ListTile(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => PatientDetailPage(
-                                          patient: docProvider
-                                              .doctorModel[index].patients,
-                                        )));
-                          },
-                          title: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text(
-                              docProvider.doctorModel[index].patients.name,
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              docProvider.doctorModel[index].patients.history
-                                  .last.message,
-                              style: TextStyle(fontSize: 15),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                )
-              : Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'No patients',
-                    style: TextStyle(fontSize: 20),
-                  ),
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                title: Text(
+                  'Emedgency',
+                  style: TextStyle(color: Colors.white),
                 ),
+                backgroundColor: Colors.redAccent,
+                leading: Container(),
+                actions: [
+                  IconButton(
+                    icon: Icon(Icons.logout),
+                    onPressed: () async {
+                      await auth.logOut();
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_) => CategoryScreen()));
+                    },
+                  )
+                ],
+              ),
+              body: docProvider.doctorModel.length > 0
+                  ? ListView.builder(
+                      itemCount: docProvider.doctorModel.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Material(
+                            elevation: 20,
+                            child: ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => PatientDetailPage(
+                                              patient: docProvider
+                                                  .doctorModel[index].patients,
+                                            )));
+                              },
+                              title: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Text(
+                                  docProvider.doctorModel[index].patients.name,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                              subtitle: Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  docProvider.doctorModel[index].patients
+                                      .history.last.message,
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    )
+                  : Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'No patients',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+            ),
+          ),
         );
       },
     );

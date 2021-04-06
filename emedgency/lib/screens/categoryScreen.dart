@@ -12,34 +12,45 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            Center(
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PatientLogin()),
-                  );
-                },
-                color: Colors.redAccent,
-                child: Text('Patient Login'),
-              ),
+            Image(
+              image: AssetImage('images/c.jpeg'),
+              fit: BoxFit.cover,
             ),
-            SizedBox(
-              height: 30,
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DoctorLogin()),
-                );
-              },
-              color: Colors.redAccent,
-              child: Text('Doctor Login'),
-            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PatientLogin()),
+                      );
+                    },
+                    color: Colors.redAccent,
+                    child: Text('Patient Login'),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DoctorLogin()),
+                    );
+                  },
+                  color: Colors.redAccent,
+                  child: Text('Doctor Login'),
+                ),
+                SizedBox(
+                  height: 250,
+                )
+              ],
+            )
           ],
         ),
       ),
