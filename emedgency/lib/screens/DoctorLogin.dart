@@ -81,6 +81,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
               ),
               TextFormField(
                 controller: password,
+                obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   labelStyle: TextStyle(

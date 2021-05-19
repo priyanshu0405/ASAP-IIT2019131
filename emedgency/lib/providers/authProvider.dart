@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:emedgency/constants/StringConstant.dart';
+import 'package:emedgency/model/updateModel.dart';
 import 'package:emedgency/model/userModel.dart';
 import 'package:emedgency/util/sharedPreferences.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(responseData);
 
-      UserPreferences().saveUser(authUser);
+      UserPreferences().saveUserLogin(authUser);
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
@@ -93,7 +94,7 @@ class AuthProvider with ChangeNotifier {
 
       UserModel authUser = UserModel.fromJson(responseData);
 
-      UserPreferences().saveUser(authUser);
+      UserPreferences().saveUserLogin(authUser);
 
       _loggedInStatus = Status.LoggedIn;
       notifyListeners();
@@ -133,35 +134,41 @@ class AuthProvider with ChangeNotifier {
       "dob": dob,
       "phone": phone,
       "address": address,
-      "history": {
-        "bp": bp,
-        "fever": fever,
-        "oxylvl": oxylvl,
-        "heartrate": heartrate,
-        "sugarlevel": sugarlevel
-      }
+      "history": [
+        {
+          "bp": bp,
+          "fever": fever,
+          "oxylvl": oxylvl,
+          "heartrate": heartrate,
+          "sugarlevel": sugarlevel
+        }
+      ]
     };
     print(jsonEncode(registerData));
     return await http
-        .post(Uri.parse(URL + REGISTER),
-            body: json.encode(registerData
-                // "username": username,
-                // "email": email,
-                // "name": name,
-                // "password": password,
-                // "role": role,
-                // "dob": dob,
-                // "phone": phone,
-                // "address": address,
-                // "history": {
-                //   "bp": bp,
-                //   "fever": fever,
-                //   "oxylvl": oxylvl,
-                //   "heartrate": heartrate,
-                //   "sugarlevel": sugarlevel
-                // }
-                ),
-            headers: {'Content-Type': 'application/json'})
+        .post(
+          Uri.parse(URL + REGISTER),
+          body: jsonEncode(registerData)
+          // "username": username,
+          // "email": email,
+          // "name": name,
+          // "password": password,
+          // "role": role,
+          // "dob": dob,
+          // "phone": phone,
+          // "address": address,
+          // "history": {
+          //   "bp": bp,
+          //   "fever": fever,
+          //   "oxylvl": oxylvl,
+          //   "heartrate": heartrate,
+          //   "sugarlevel": sugarlevel
+          // }
+          ,
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
+        )
         .then(onValue)
         .catchError(onError);
   }
@@ -172,9 +179,9 @@ class AuthProvider with ChangeNotifier {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-      UserModel authUser = UserModel.fromJson(responseData);
+      UpdateModel authUser = updateModelFromJson(response.body);
 
-      UserPreferences().saveUser(authUser);
+      UserPreferences().saveUser(authUser.founduser);
       result = {
         'status': true,
         'message': 'Successfully registered',

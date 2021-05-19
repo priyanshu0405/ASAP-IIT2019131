@@ -110,6 +110,7 @@ class _PatientRegisterState extends State<PatientRegister> {
               ),
               TextFormField(
                 controller: password,
+                obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   labelStyle: TextStyle(

@@ -1,8 +1,9 @@
+import 'package:emedgency/model/updateModel.dart';
 import 'package:emedgency/model/userModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences {
-  Future<bool> saveUser(UserModel user) async {
+  Future<bool> saveUser(Founduser user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("id", user.id);
@@ -20,11 +21,11 @@ class UserPreferences {
     prefs.setInt("v", user.v);
     prefs.setString("phone", user.phone);
     prefs.setString("role", user.role);
-    prefs.setString("token", user.salt);
-    prefs.setString("hash", user.hash);
+    // prefs.setString("token", user.salt);
+    // prefs.setString("hash", user.hash);
 
     print("object prefere");
-    print(user.hash);
+    // print(user.hash);
 
     return prefs.commit();
   }
@@ -58,15 +59,6 @@ class UserPreferences {
         dob: dob,
         username: username,
         v: v,
-        history: [
-          History(
-              bp: bp,
-              fever: fever,
-              oxylvl: oxylvl,
-              sugarlevel: sugarlevel,
-              heartrate: heartrate,
-              timestamp: timestamp)
-        ],
         phone: phone,
         role: role,
         salt: salt,
@@ -87,5 +79,32 @@ class UserPreferences {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String token = prefs.getString("salt");
     return token;
+  }
+
+  Future<bool> saveUserLogin(UserModel user) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString("id", user.id);
+    prefs.setString("name", user.name);
+    prefs.setString("email", user.email);
+    prefs.setString("address", user.address);
+    prefs.setString("bp", user.history[0].bp);
+    prefs.setInt("oxylvl", user.history[0].oxylvl);
+    prefs.setInt("heartrate", user.history[0].heartrate);
+    prefs.setInt("sugarlevel", user.history[0].sugarlevel);
+    prefs.setInt("fever", user.history[0].fever);
+    prefs.setString("timestamp", user.history[0].timestamp);
+    prefs.setString("username", user.username);
+    prefs.setString("dob", user.dob);
+    prefs.setInt("v", user.v);
+    prefs.setString("phone", user.phone);
+    prefs.setString("role", user.role);
+    prefs.setString("token", user.salt);
+    prefs.setString("hash", user.hash);
+
+    print("object prefere");
+    print(user.hash);
+
+    return prefs.commit();
   }
 }
