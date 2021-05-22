@@ -1,15 +1,52 @@
-# EMEDGENCY
 
-Project number - 42
+<img src="https://github.com/priyanshu0405/ASAP-IIT2019131/blob/master/images/log.jpeg" width="100%" height="400"> 
 
-Problem statement- Develop an android-based application for emergency management systems in hospitals or healthcare applications.
-Description-
-Develop a software for emergency cases occurring in the health domain.
-First usecase must include like a person is monitoring his body vital parameters daily twice, if the vital parameters fluctuate beyond the specified threshold then he must be able to invoke a msg to his consulting doctor.
-Consulting doctors must receive an alert and  be able to prescribe the medicine and suggestions online.
+# About 
 
+Emedgency is a emergency management system in hospitals or in more detail, it is a mobile application which will enable communication between doctors and patients while remaining at home. Also we have added a special SOS feature to call for an ambulance in case of an emergency.
 
+It aims to -
+- Patients can add thier vital parameters, if the vital parameters fluctuate beyond the specified threshold then he must be able to invoke a msg to his consulting doctor.
+- Patient can check his/her past medical records.
+- Patients can send SOS to call ambulance in case of emergency with the click of a button.
+- Consulting doctors will receive an alert and  be able to prescribe the medicine and suggestions online.
 
+# Installation
 
+***Host System Package Dependencies***
 
-<img src="https://github.com/priyanshu0405/ASAP-IIT2019131/blob/master/images/Screenshot_2021-03-10-23-23-18-119_com.priyanshu.emedgency.jpg" width="200" height="400">         <img src="https://github.com/priyanshu0405/ASAP-IIT2019131/blob/master/images/Screenshot_2021-03-10-23-53-52-661_com.priyanshu.emedgency.jpg" width="200" height="400">          <img src="https://github.com/priyanshu0405/ASAP-IIT2019131/blob/master/images/Screenshot_2021-03-11-00-42-42-315_com.priyanshu.emedgency.jpg" width="200" height="400">
+- NodeJS
+- NPM
+- MongoDB
+
+***Requirements for Frontend***
+
+- Android Studio
+- Flutter SDK
+- Dart plugin
+
+```
+git clone https://github.com/priyanshu0405/ASAP-IIT2019131.git
+cd ASAP-IIT2019131
+```
+The backend is hosted on Heroku but if you want to run backend locally follow the steps -
+
+Terminal Instance 1: Backend
+
+```
+cd backend
+npm install 
+npm start
+```
+and navigate to ```localhost:3000```.
+
+Open the project in android studio an follow the steps -
+
+Terminal Instance 2: Frontend
+
+```
+flutter pub get
+flutter run
+```
+If you are running backend locally make changes in ```ASAP-IIT2019131/emedgency/lib/constants/StringConstant.dart``` file - 
+Change the URL constant to - “http://localhost:3000/” .
